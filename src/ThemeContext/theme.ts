@@ -57,6 +57,26 @@ export const AppLightTheme: Theme = createTheme({
             lineHeight: 1.227,
         },
     },
+    components: {
+        MuiAppBar:{
+            styleOverrides: {
+                root: {
+                  backgroundColor: "transparent",
+                  boxShadow: 'none'
+                },
+            },
+        },
+        MuiLink:{
+            styleOverrides: {
+                root: {
+                  fontFamily: '"Poppins", sans-serif',
+                  fontSize: 16,
+                  fontWeight: 500,
+                  margin: 'auto 0'
+                },
+            },
+        }
+    }
 });
 
 export const AppDarkTheme: Theme = createTheme({
