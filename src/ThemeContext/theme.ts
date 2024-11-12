@@ -66,6 +66,13 @@ export const AppLightTheme: Theme = createTheme({
                 },
             },
         },
+        MuiToolbar:{
+            styleOverrides: {
+                root: {
+                  padding: 0,
+                },
+            }
+        },
         MuiLink:{
             styleOverrides: {
                 root: {
