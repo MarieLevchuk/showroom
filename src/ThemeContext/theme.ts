@@ -62,16 +62,10 @@ export const AppLightTheme: Theme = createTheme({
             styleOverrides: {
                 root: {
                   backgroundColor: "transparent",
-                  boxShadow: 'none'
+                  boxShadow: 'none',
+                  fontSize: 16
                 },
             },
-        },
-        MuiToolbar:{
-            styleOverrides: {
-                root: {
-                  padding: 0,
-                },
-            }
         },
         MuiLink:{
             styleOverrides: {
