@@ -13,6 +13,7 @@ export const AppLightTheme: Theme = createTheme({
         },
         background: {
             default: "rgba(251, 251, 251, 1)",
+            // default: "rgba(20, 20, 20, 1)",
             paper: "rgba(255, 255, 255, 1)"
         },
         text: {
@@ -40,7 +41,7 @@ export const AppLightTheme: Theme = createTheme({
         },
         h2:{
             fontFamily: '"Montserrat", sans-serif',
-            fontWeight: 500,
+            fontWeight: 600,
             fontSize: 32,
             lineHeight: 1.219,
         },
@@ -83,7 +84,7 @@ export const AppLightTheme: Theme = createTheme({
 export const AppDarkTheme: Theme = createTheme({
     palette: {
         background: {
-            default: "rgba(20, 20, 20, 1)"
+            default: "rgba(20, 20, 20, 1)",
         }
     }
 })

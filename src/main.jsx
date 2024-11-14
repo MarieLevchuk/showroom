@@ -10,8 +10,8 @@ import { CssBaseline } from '@mui/material'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider theme={AppLightTheme}>
-      <CssBaseline />
-        <App />
+        <CssBaseline />
+        <App />                
     </ThemeProvider>
   </StrictMode>
 )

@@ -35,7 +35,7 @@ function Header(props) {
     return(
         <Box>
             <AppBar  position="static" component="nav">
-                <Toolbar disableGutters sx={{width:'100%', height: '103px'}}>
+                <Toolbar disableGutters sx={{width:'100%', my:{xs:0.5, md:2}}}>
                     <IconButton
                         color="primary"
                         aria-label="open drawer"
