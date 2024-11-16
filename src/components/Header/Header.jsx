@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Container, CssBaseline, Divider, Drawer, IconButton, Link, List, ListItem, ListItemButton, ListItemText, Menu, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Container, CssBaseline, Divider, Drawer, IconButton, Link, List, ListItem, ListItemButton, ListItemText, Menu, styled, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import PropTypes from 'prop-types';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -34,8 +34,17 @@ function Header(props) {
     
     return(
         <Box>
-            <AppBar  position="static" component="nav">
-                <Toolbar disableGutters sx={{width:'100%', my:{xs:0.5, md:2}}}>
+            <AppBar position="fixed"  component="nav" 
+                sx={{
+                    backgroundColor:{xs:'rgba(20, 20, 20, 0.5)', sm:'none'},
+                    backdropFilter:{xs: 'blur(8px)', sm:'none'},
+                    background: {
+                        xs: 'common.black', 
+                        sm: 'linear-gradient(to right, rgba(20, 20, 20, 1) 0%, rgba(20, 20, 20, 1) 45%, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 1) 100%)'
+                    }
+                }}
+            >
+                <Toolbar disableGutters sx={{width:'100%', my:{xs:1, sm:2}}}>
                     <IconButton
                         color="primary"
                         aria-label="open drawer"
@@ -70,7 +79,7 @@ function Header(props) {
                     </Container>
                 </Toolbar>
             </AppBar>
-
+            {/* <Offset />                            */}
             <nav>
                 <Drawer
                   container={container}
