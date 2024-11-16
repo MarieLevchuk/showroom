@@ -8,8 +8,11 @@ export const AppLightTheme: Theme = createTheme({
         },
         primary:{
             main: "rgba(254, 132, 0, 1)",
-            light: "rgba(255, 228, 198, 1)",
+            light: "rgba(255, 166, 70, 1)",
             dark: "rgba(217, 114, 2, 1)"
+        },
+        secondary:{
+            main: "rgba(255, 217, 175, 1)"
         },
         background: {
             default: "rgba(251, 251, 251, 1)",
@@ -18,7 +21,7 @@ export const AppLightTheme: Theme = createTheme({
         },
         text: {
             primary: "rgba(20, 20, 20, 1)",
-            secondary: "rgba(20, 20, 20, 1)"
+            secondary: "rgba(255, 217, 175, 1)"
         },
         grey: {
             100: "rgba(196, 196, 196, 1)"

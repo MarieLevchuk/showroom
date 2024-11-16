@@ -72,16 +72,16 @@ export default function HeadSection () {
                                 (!downsmall)&&
                                 <Box mx={'auto'} mb={3} sx={{height:38, width:'1px', backgroundColor:'primary.main'}}></Box>
                             }
-                            <IconButton aria-label="facebook" color="primary">
+                            <IconButton aria-label="facebook" sx={{color:{xs:"primary.light", sm:"primary.main"}}} >
                                 <FacebookIcon />
                             </IconButton>
-                            <IconButton aria-label="facebook" color="primary">
+                            <IconButton aria-label="facebook" sx={{color:{xs:"primary.light", sm:"primary.main"}}}>
                                 <InstagramIcon />
                             </IconButton>
-                            <IconButton aria-label="facebook" color="primary">
+                            <IconButton aria-label="facebook" sx={{color:{xs:"primary.light", sm:"primary.main"}}}>
                                 <YouTubeIcon />
                             </IconButton>
-                            <IconButton aria-label="facebook" color="primary">
+                            <IconButton aria-label="facebook" sx={{color:{xs:"primary.light", sm:"primary.main"}}}>
                                 <LinkedInIcon />
                             </IconButton>
                             {
