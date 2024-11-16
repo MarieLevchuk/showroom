@@ -1,16 +1,37 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, Divider, Typography } from "@mui/material";
 
 export default function MainSection(){
     return(
-        <>
+        <Box 
+            // sx={{height:'100vh'}}
+        >
             <Container maxWidth="lg" >
-                <Box sx={{width:'auto'}}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores omnis voluptas autem sapiente. Eum nihil cumque quos ad, voluptas dolorem. Amet esse dicta ea minima repellendus quasi quisquam facilis excepturi, optio, sed quas magni modi mollitia aperiam saepe aut delectus hic sapiente iure veritatis atque exercitationem nostrum voluptatem rerum. Soluta assumenda nulla aperiam non recusandae tempora vel explicabo, animi iure sed. Quasi, quam ab. Distinctio error, repellat dolorum obcaecati sunt in fugiat delectus. Recusandae, ipsum est ex esse modi qui, hic commodi sint deserunt assumenda dolorum exercitationem doloremque iste atque possimus ipsa. Sit officiis rerum temporibus minima illum nesciunt quos, excepturi fugit facere et ea doloribus id molestiae veritatis qui placeat pariatur labore at quasi velit dolorum ex aliquam hic? Vero distinctio ad cum ducimus, doloribus, expedita error, consequuntur consequatur porro vitae adipisci. Atque, reprehenderit! Fugit quia velit corrupti? Sint culpa dicta soluta mollitia, voluptate velit vitae quasi. Iste blanditiis ab cumque autem natus corporis explicabo repudiandae expedita eius illum quis dolore, molestias quidem magni harum vero nihil libero dolorem, beatae fuga eligendi. Facere ab similique culpa consequuntur, voluptatibus est suscipit earum molestiae impedit iure tempore asperiores aspernatur, ea ad totam accusamus blanditiis laudantium, iste ratione eaque omnis dolores! Commodi?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores omnis voluptas autem sapiente. Eum nihil cumque quos ad, voluptas dolorem. Amet esse dicta ea minima repellendus quasi quisquam facilis excepturi, optio, sed quas magni modi mollitia aperiam saepe aut delectus hic sapiente iure veritatis atque exercitationem nostrum voluptatem rerum. Soluta assumenda nulla aperiam non recusandae tempora vel explicabo, animi iure sed. Quasi, quam ab. Distinctio error, repellat dolorum obcaecati sunt in fugiat delectus. Recusandae, ipsum est ex esse modi qui, hic commodi sint deserunt assumenda dolorum exercitationem doloremque iste atque possimus ipsa. Sit officiis rerum temporibus minima illum nesciunt quos, excepturi fugit facere et ea doloribus id molestiae veritatis qui placeat pariatur labore at quasi velit dolorum ex aliquam hic? Vero distinctio ad cum ducimus, doloribus, expedita error, consequuntur consequatur porro vitae adipisci. Atque, reprehenderit! Fugit quia velit corrupti? Sint culpa dicta soluta mollitia, voluptate velit vitae quasi. Iste blanditiis ab cumque autem natus corporis explicabo repudiandae expedita eius illum quis dolore, molestias quidem magni harum vero nihil libero dolorem, beatae fuga eligendi. Facere ab similique culpa consequuntur, voluptatibus est suscipit earum molestiae impedit iure tempore asperiores aspernatur, ea ad totam accusamus blanditiis laudantium, iste ratione eaque omnis dolores! Commodi?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores omnis voluptas autem sapiente. Eum nihil cumque quos ad, voluptas dolorem. Amet esse dicta ea minima repellendus quasi quisquam facilis excepturi, optio, sed quas magni modi mollitia aperiam saepe aut delectus hic sapiente iure veritatis atque exercitationem nostrum voluptatem rerum. Soluta assumenda nulla aperiam non recusandae tempora vel explicabo, animi iure sed. Quasi, quam ab. Distinctio error, repellat dolorum obcaecati sunt in fugiat delectus. Recusandae, ipsum est ex esse modi qui, hic commodi sint deserunt assumenda dolorum exercitationem doloremque iste atque possimus ipsa. Sit officiis rerum temporibus minima illum nesciunt quos, excepturi fugit facere et ea doloribus id molestiae veritatis qui placeat pariatur labore at quasi velit dolorum ex aliquam hic? Vero distinctio ad cum ducimus, doloribus, expedita error, consequuntur consequatur porro vitae adipisci. Atque, reprehenderit! Fugit quia velit corrupti? Sint culpa dicta soluta mollitia, voluptate velit vitae quasi. Iste blanditiis ab cumque autem natus corporis explicabo repudiandae expedita eius illum quis dolore, molestias quidem magni harum vero nihil libero dolorem, beatae fuga eligendi. Facere ab similique culpa consequuntur, voluptatibus est suscipit earum molestiae impedit iure tempore asperiores aspernatur, ea ad totam accusamus blanditiis laudantium, iste ratione eaque omnis dolores! Commodi?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores omnis voluptas autem sapiente. Eum nihil cumque quos ad, voluptas dolorem. Amet esse dicta ea minima repellendus quasi quisquam facilis excepturi, optio, sed quas magni modi mollitia aperiam saepe aut delectus hic sapiente iure veritatis atque exercitationem nostrum voluptatem rerum. Soluta assumenda nulla aperiam non recusandae tempora vel explicabo, animi iure sed. Quasi, quam ab. Distinctio error, repellat dolorum obcaecati sunt in fugiat delectus. Recusandae, ipsum est ex esse modi qui, hic commodi sint deserunt assumenda dolorum exercitationem doloremque iste atque possimus ipsa. Sit officiis rerum temporibus minima illum nesciunt quos, excepturi fugit facere et ea doloribus id molestiae veritatis qui placeat pariatur labore at quasi velit dolorum ex aliquam hic? Vero distinctio ad cum ducimus, doloribus, expedita error, consequuntur consequatur porro vitae adipisci. Atque, reprehenderit! Fugit quia velit corrupti? Sint culpa dicta soluta mollitia, voluptate velit vitae quasi. Iste blanditiis ab cumque autem natus corporis explicabo repudiandae expedita eius illum quis dolore, molestias quidem magni harum vero nihil libero dolorem, beatae fuga eligendi. Facere ab similique culpa consequuntur, voluptatibus est suscipit earum molestiae impedit iure tempore asperiores aspernatur, ea ad totam accusamus blanditiis laudantium, iste ratione eaque omnis dolores! Commodi?
+                <Box 
+                    sx={{
+                        display:'flex',
+                        flexDirection:'column'
+                    }}
+                >
+                    {/* TITLE CARS */}
+                    <Box 
+                        sx={{
+                            textAlign:'center',
+                            my:4
+                        }}
+                    >
+                        <Typography variant="h3" color="common.black">
+                            Our featured models
+                        </Typography>                          
+                        <Divider />
+                    </Box>
+
+                    {/* CONTENT CARS */}
+                    <Box>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed reprehenderit vel deserunt, quo quibusdam quos tenetur sint eum quaerat eaque fugiat aut quas? Quibusdam ab repellat quisquam impedit repudiandae facere vero consequatur. Cupiditate repudiandae quidem consequuntur hic, sapiente eum veritatis corrupti harum culpa, tempore nihil unde? Temporibus ipsam quas voluptatem sequi animi vero eius totam laboriosam, repellendus saepe fugiat distinctio tenetur ab molestias doloribus minus asperiores. Reiciendis quo aut necessitatibus molestiae architecto temporibus cupiditate eaque recusandae perferendis voluptatibus. Laborum distinctio nihil illo eaque voluptates nam quia neque quam voluptatem qui illum repudiandae commodi quis quaerat, delectus corrupti atque, dolorum suscipit.
+                    </Box>
+
                 </Box>
             </Container>
-        </>
+        </Box>
     );
 }
