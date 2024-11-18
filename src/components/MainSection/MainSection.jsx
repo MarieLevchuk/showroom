@@ -3,6 +3,7 @@ import SectionHeader from "./SectionHeader";
 import CarCard from "./CarCard";
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import ContactForm from "../ContactForm/ContactForm";
+import Info from "../Info/Info";
 
 const featuredModels = [
     { id: 1, name: 'Model A', img: '2.jpg', year:2019,  persons:5, body:'sedan', fuel: 'Electric' },
@@ -42,6 +43,10 @@ export default function MainSection(){
                     <Box mt={4} sx={{alignSelf:'center'}}>
                     <Link href="#" underline="none"> discover all models <NorthEastIcon/></Link>
                     </Box>
+                </Box>
+            </Container>
+
+                    <Info/>
 
                     {/* TITLE TEST DRIVE */}
                     <SectionHeader title="Test drive"/>
@@ -49,8 +54,7 @@ export default function MainSection(){
                     {/* TITLE CONTACT US */}
                     <SectionHeader title="Contact us"/>
                     <ContactForm/>
-                </Box>
-            </Container>
+            
         </Box>
     );
 }
