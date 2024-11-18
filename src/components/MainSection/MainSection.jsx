@@ -1,5 +1,13 @@
-import { Box, Container, Divider, Typography } from "@mui/material";
+import { Box, Container, Divider, Link, Typography } from "@mui/material";
 import SectionHeader from "./SectionHeader";
+import CarCard from "./CarCard";
+import NorthEastIcon from '@mui/icons-material/NorthEast';
+
+const featuredModels = [
+    { id: 1, name: 'Model A', img: '2.jpg', year:2019,  persons:5, body:'sedan', fuel: 'Electric' },
+    { id: 2, name: 'Model B', img: '3.webp', year:2024, persons:2, body:'sports',  fuel: 'Gasoline' },
+    { id: 3, name: 'Model C', img: '4.webp', year:1980, persons:2, body:'sedan',  fuel: 'Gasoline' }
+];
 
 export default function MainSection(){
     return(
@@ -17,10 +25,26 @@ export default function MainSection(){
                     <SectionHeader title="Our featured models"/>
 
                     {/* CONTENT CARS */}
-                    <Box>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed reprehenderit vel deserunt, quo quibusdam quos tenetur sint eum quaerat eaque fugiat aut quas? Quibusdam ab repellat quisquam impedit repudiandae facere vero consequatur. Cupiditate repudiandae quidem consequuntur hic, sapiente eum veritatis corrupti harum culpa, tempore nihil unde? Temporibus ipsam quas voluptatem sequi animi vero eius totam laboriosam, repellendus saepe fugiat distinctio tenetur ab molestias doloribus minus asperiores. Reiciendis quo aut necessitatibus molestiae architecto temporibus cupiditate eaque recusandae perferendis voluptatibus. Laborum distinctio nihil illo eaque voluptates nam quia neque quam voluptatem qui illum repudiandae commodi quis quaerat, delectus corrupti atque, dolorum suscipit.
+                    
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent:'center',
+                            flexWrap:'wrap',
+                            gap: {xs:1, sm: 4}
+                        }}
+                    >
+                        {
+                            featuredModels.map(model => <CarCard key={model.id} model={model}/>)
+                        }
                     </Box>
 
+                    <Box mt={4} sx={{alignSelf:'center'}}>
+                    <Link href="#" underline="none"> see all models <NorthEastIcon/></Link>
+                    </Box>
+
+                    {/* TITLE CARS */}
+                    <SectionHeader title="Our featured models"/>
                 </Box>
             </Container>
         </Box>
