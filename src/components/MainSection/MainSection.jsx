@@ -4,6 +4,7 @@ import CarCard from "./CarCard";
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import ContactForm from "../ContactForm/ContactForm";
 import Info from "../Info/Info";
+import TestDriveForm from "../TestDriveForm/TestDriveForm";
 
 const featuredModels = [
     { id: 1, name: 'Model A', img: '2.jpg', year:2019,  persons:5, body:'sedan', fuel: 'Electric' },
@@ -50,6 +51,7 @@ export default function MainSection(){
 
                     {/* TITLE TEST DRIVE */}
                     <SectionHeader title="Test drive"/>
+                    <TestDriveForm/>
 
                     {/* TITLE CONTACT US */}
                     <SectionHeader title="Contact us"/>
