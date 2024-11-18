@@ -2,6 +2,7 @@ import { Box, Container, Divider, Link, Typography } from "@mui/material";
 import SectionHeader from "./SectionHeader";
 import CarCard from "./CarCard";
 import NorthEastIcon from '@mui/icons-material/NorthEast';
+import ContactForm from "../ContactForm/ContactForm";
 
 const featuredModels = [
     { id: 1, name: 'Model A', img: '2.jpg', year:2019,  persons:5, body:'sedan', fuel: 'Electric' },
@@ -25,7 +26,6 @@ export default function MainSection(){
                     <SectionHeader title="Our featured models"/>
 
                     {/* CONTENT CARS */}
-                    
                     <Box
                         sx={{
                             display: 'flex',
@@ -40,11 +40,15 @@ export default function MainSection(){
                     </Box>
 
                     <Box mt={4} sx={{alignSelf:'center'}}>
-                    <Link href="#" underline="none"> see all models <NorthEastIcon/></Link>
+                    <Link href="#" underline="none"> discover all models <NorthEastIcon/></Link>
                     </Box>
 
-                    {/* TITLE CARS */}
-                    <SectionHeader title="Our featured models"/>
+                    {/* TITLE TEST DRIVE */}
+                    <SectionHeader title="Test drive"/>
+
+                    {/* TITLE CONTACT US */}
+                    <SectionHeader title="Contact us"/>
+                    <ContactForm/>
                 </Box>
             </Container>
         </Box>

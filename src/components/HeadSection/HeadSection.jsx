@@ -1,10 +1,7 @@
 import { Box, Button, Container, IconButton, Typography, useMediaQuery } from "@mui/material";
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import YouTubeIcon from '@mui/icons-material/YouTube';
 import Header from "../Header/Header";
 import { useTheme } from "@emotion/react";
+import Social from "../Social/Social";
 
 export default function HeadSection () {
     const theme = useTheme();
@@ -61,34 +58,7 @@ export default function HeadSection () {
                     >
                         
                         {/* SOCIAL MEDIA  */}
-                        <Box sx={{
-                            display:'flex',
-                            flexDirection:{xs:'row', sm: 'column'},
-                            alignItems: 'center',
-                            mb:{xs:4,  sm:0},
-                            mr:{xs:0, sm: 4},
-                        }}>
-                            {
-                                (!downsmall)&&
-                                <Box mx={'auto'} mb={3} sx={{height:38, width:'1px', backgroundColor:'primary.main'}}></Box>
-                            }
-                            <IconButton aria-label="facebook" sx={{color:{xs:"primary.light", sm:"primary.main"}}} >
-                                <FacebookIcon />
-                            </IconButton>
-                            <IconButton aria-label="facebook" sx={{color:{xs:"primary.light", sm:"primary.main"}}}>
-                                <InstagramIcon />
-                            </IconButton>
-                            <IconButton aria-label="facebook" sx={{color:{xs:"primary.light", sm:"primary.main"}}}>
-                                <YouTubeIcon />
-                            </IconButton>
-                            <IconButton aria-label="facebook" sx={{color:{xs:"primary.light", sm:"primary.main"}}}>
-                                <LinkedInIcon />
-                            </IconButton>
-                            {
-                                (!downsmall)&&
-                                <Box mx={'auto'} mt={3} sx={{height:38, width:'1px', backgroundColor:'primary.main'}}></Box>
-                            }
-                        </Box>
+                        <Social/>
                         
                         {/* TEXT */}
                         <Box 
