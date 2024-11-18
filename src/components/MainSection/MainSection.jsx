@@ -1,4 +1,5 @@
 import { Box, Container, Divider, Typography } from "@mui/material";
+import SectionHeader from "./SectionHeader";
 
 export default function MainSection(){
     return(
@@ -13,17 +14,7 @@ export default function MainSection(){
                     }}
                 >
                     {/* TITLE CARS */}
-                    <Box 
-                        sx={{
-                            textAlign:'center',
-                            my:4
-                        }}
-                    >
-                        <Typography variant="h3" color="common.black">
-                            Our featured models
-                        </Typography>                          
-                        <Divider />
-                    </Box>
+                    <SectionHeader title="Our featured models"/>
 
                     {/* CONTENT CARS */}
                     <Box>
