@@ -54,7 +54,7 @@ function ColorlibStepIcon(props) {
   );
 }
 
-const steps = ['Select a car', 'Select date and time', 'Note smth else'];
+const steps = ['Select a car', 'Select date and time', 'Your contacts'];
 
 export default function TestDriveForm(){
     const [carModel, setCarModel] = useState('');
@@ -117,6 +117,7 @@ export default function TestDriveForm(){
         <Box>
             <Container maxWidth='lg'>
                 <Box mx={'auto'} sx={{ width: '80%' }}>
+                  <Box  sx={{display:{xs:'flex', sm:'block'}, width:{xs:'100%', sm:'auto'}, justifyContent:'center'}}>
                     <Stepper orientation={isxsmall?"vertical":"horizontal"} activeStep={activeStep}>
                       {steps.map((label, index) => {
                         const stepProps = {};
@@ -140,6 +141,7 @@ export default function TestDriveForm(){
                       })}
 
                     </Stepper>
+                    </Box>
 
                       <Box
                         sx={{
@@ -205,9 +207,13 @@ export default function TestDriveForm(){
                           ) : (
                             <Box sx={{
                               display:'flex',
+                              flexDirection:{xs:'column', sm:'row'},
                               alignItems: 'center',
+                              gap:2
                             }}>
-                              <TextField label="Notes" multiline maxRows={4} />
+                              <TextField label="Name" />
+                              <TextField label="Phone"  />
+                              <TextField label="E-mail" />
                             </Box>
                           )
                         }
