@@ -13,8 +13,9 @@ export default function Filter(){
     }
 
     return (
-        <Paper>
-            <Box sx={{display:'flex', justifyContent:'space-around'}}>
+        <Box mx='auto' sx={{ width:{xs:'auto', md:'90', lg:'70%'}}}>
+        <Paper >
+            <Box my={4} py={4} sx={{display:'flex', flexDirection:{xs:'column', sm:'row'}, justifyContent:'space-around', alignItems:'center'}}>
                 <Box sx={{display:'flex', flexDirection:'column'}}>
                     <Typography>Fuel</Typography>
                     <FormControlLabel
@@ -31,14 +32,14 @@ export default function Filter(){
                     />
                 </Box>
                 <Box>
-                    <Typography>Body</Typography>
+                    <Typography mb={1}>Car body</Typography>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label1">Car body</InputLabel>
+                        {/* <InputLabel id="demo-simple-select-label1">Car body</InputLabel> */}
                         <Select
                           labelId="demo-simple-select-label1"
                           id="demo-simple-select1"
                           value={bodyType}
-                          label="Body type"
+                        //   label="Body type"
                           onChange={handleChange}
                           sx={{minWidth:200}}
                         >
@@ -59,13 +60,8 @@ export default function Filter(){
                       </DemoContainer>
                     </LocalizationProvider>
                 </Box>
-                <Box>
-                1
-                </Box>
-                <Box>
-                1
-                </Box>
             </Box>
         </Paper>
+        </Box>
     );
 }
