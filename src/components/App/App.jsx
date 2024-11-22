@@ -5,12 +5,14 @@ import MainSection from '../MainSection/MainSection'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
 import ModelsSection from '../ModelsSection/ModelsSection'
+import ModelPreviewSection from '../ModelPreviewSection/ModelPreviewSection'
 
 export default function App() {
   return (
     <>
       <Header/>
-      <ModelsSection/>
+      <ModelPreviewSection/>
+      {/* <ModelsSection/> */}
       
       {/* <HeadSection/>
       <MainSection/> */}

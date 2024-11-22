@@ -80,6 +80,32 @@ export const AppLightTheme: Theme = createTheme({
                   margin: 'auto 0'
                 },
             },
+        },
+        MuiFormLabel:{
+            styleOverrides: {
+                root: {
+                  fontSize: 'inherit',
+                  fontWeight: 500,
+                  color:'GrayText'
+                },
+            },
+        },
+        MuiTableCell:{
+            styleOverrides: {
+                root: {
+                    fontSize:'inherit',
+                    variants: [
+                        {
+                            props: { variant: 'th' },
+                            style: {
+                                color:  "rgba(154, 154, 154, 1)",
+                                fontWeight: 500,
+                                textTransform:'capitalize'
+                            }
+                        }
+                    ]
+                }
+            }
         }
     }
 });
