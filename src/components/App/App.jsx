@@ -6,12 +6,14 @@ import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
 import ModelsSection from '../ModelsSection/ModelsSection'
 import ModelPreviewSection from '../ModelPreviewSection/ModelPreviewSection'
+import BuildsSection from '../BuildsSection/BuildsSection'
 
 export default function App() {
   return (
     <>
       <Header/>
-      <ModelPreviewSection/>
+      <BuildsSection/>
+      {/* <ModelPreviewSection/> */}
       {/* <ModelsSection/> */}
       
       {/* <HeadSection/>
