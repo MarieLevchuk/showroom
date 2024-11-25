@@ -23,7 +23,7 @@ export default function HeadSection () {
                 sm: 'linear-gradient(to right, rgba(20, 20, 20, 1) 0%, rgba(20, 20, 20, 1) 45%, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 1) 100%)'
             }
         }}>
-            <Header/>
+            {/* <Header/> */}
 
             {/* CONTENT */}
             <Box sx={{

@@ -12,12 +12,12 @@ export default function App() {
   return (
     <>
       <Header/>
-      <BuildsSection/>
+      {/* <BuildsSection/> */}
       {/* <ModelPreviewSection/> */}
       {/* <ModelsSection/> */}
       
-      {/* <HeadSection/>
-      <MainSection/> */}
+      <HeadSection/>
+      <MainSection/>
       <Footer/>
     </>
   )
