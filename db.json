@@ -2,7 +2,7 @@
     "cars": [
         { "id": 1, "name": "AMG-GT", "img": "amggt.jpg", "year":2025, "isConfigurable": true },
         { "id": 2, "name": "SL Roadster", "img": "3.webp", "year":2025, "isConfigurable": true },
-        { "id": 3, "name": "CLE Solar", "img": "2.webp", "year":2025, "isConfigurable": true },
+        { "id": 3, "name": "CLE Solar", "img": "2.jpg", "year":2025, "isConfigurable": true },
         { "id": 4, "name": "SLR McLaren", "img": "2.jpg", "year":2000, "isConfigurable": false},
         { "id": 5, "name": "SLS", "img": "3.webp", "year":2010, "isConfigurable": false},
         { "id": 6, "name": "AMG One", "img": "4.webp", "year":2022, "isConfigurable": false},
@@ -26,7 +26,7 @@
         { "id": 24, "name": "H247 GLA", "img": "4.webp", "year":2024, "isConfigurable": false },
         { "id": 25, "name": "W122 AMG-GTS", "img": "amggt.jpg", "year":2024, "isConfigurable": false },
         { "id": 26, "name": "N100 SL Roadster", "img": "3.webp", "year":2025, "isConfigurable": true },
-        { "id": 27, "name": "A033 CLE Solar", "img": "2.webp", "year":2012, "isConfigurable": false },
+        { "id": 27, "name": "A033 CLE Solar", "img": "2.jpg", "year":2012, "isConfigurable": false },
         { "id": 28, "name": "S4 SLR McLaren", "img": "2.jpg", "year":2020, "isConfigurable": false},
         { "id": 29, "name": "X890 SLS", "img": "3.webp", "year":2012, "isConfigurable": false},
         { "id": 30, "name": "Z999 AMG One", "img": "4.webp", "year":2023, "isConfigurable": false},

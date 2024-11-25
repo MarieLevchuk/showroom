@@ -35,15 +35,15 @@ export default function CarCard({model}){
               >
                 <Box sx={{display:'flex', flexDirection:'row', flexWrap:'nowrap', alignItems:'center' }}>
                     <PersonIcon fontSize="small" sx={{color:'grey.100'}}/> 
-                    {model.persons}
+                    {model.specifications[0].persons}
                 </Box>
                 <Box sx={{display:'flex', flexDirection:'row', flexWrap:'nowrap', alignItems:'center' }}>
                     <LocalGasStationIcon fontSize="small" sx={{color:'grey.100'}}/> 
-                    {model.fuel}
+                    {model.specifications[0].fuel}
                 </Box>
                 <Box sx={{display:'flex', flexDirection:'row', flexWrap:'nowrap', alignItems:'center' }}>
                     <DirectionsCarIcon fontSize="small" sx={{color:'grey.100'}}/> 
-                    {model.body}
+                    {model.specifications[0].body}
                 </Box>
               </Box>
             </CardContent>
