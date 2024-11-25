@@ -4,7 +4,7 @@ const initialState = {
     dataLoadState: 0, // 0 - not loaded, 1 - is loading, 2 - loaded, 3 - error
     dataLoadError: null,
 
-    cars: [],
+    cars: null,
 }
 
 export const carsSlice = createSlice({

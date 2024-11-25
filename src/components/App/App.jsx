@@ -17,7 +17,7 @@ export default function App() {
         <Header/>
         {/* <BuildsSection/> */}
         {/* <ModelPreviewSection/> */}
-        {/* <ModelsSection/> */}
+        <ModelsSection/>
 
         <HeadSection/>
         <MainSection/>

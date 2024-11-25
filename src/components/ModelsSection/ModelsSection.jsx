@@ -10,9 +10,7 @@ export default function ModelsSection(){
                 <SectionHeader title='All Models' />
                 <Filter/>
                 <ModelsList/>
-                <Box mt={4} sx={{display:'flex', justifyContent:"center"}}>
-                    <Pagination count={10} />
-                </Box>
+                
             </Container>
         </Box >
     );
