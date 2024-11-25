@@ -3,15 +3,15 @@ import SectionHeader from "../MainSection/SectionHeader";
 import { DataGrid } from '@mui/x-data-grid';
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'model', headerName: 'Model', width: 130 },
-    { field: 'color', headerName: 'Color', width: 130 },
-    { field: 'wheels', headerName: 'Wheels', width: 130 },
-    { field: 'interior', headerName: 'Interior', width: 130 },
-    { field: 'persons', headerName: 'Persons', width: 130 },
-    { field: 'fuel', headerName: 'Fuel', width: 130 },
-    { field: 'body', headerName: 'Car body', width: 130 },
-    { field: 'transmission', headerName: 'Transmission', width: 130 },
+    { field: 'id', headerName: 'ID'},
+    { field: 'model', headerName: 'Model'},
+    { field: 'color', headerName: 'Color'},
+    { field: 'wheels', headerName: 'Wheels'},
+    { field: 'interior', headerName: 'Interior'},
+    { field: 'persons', headerName: 'Persons'},
+    { field: 'fuel', headerName: 'Fuel'},
+    { field: 'body', headerName: 'Car body'},
+    { field: 'transmission', headerName: 'Transmission'},
 ];
   
 const rows = [
