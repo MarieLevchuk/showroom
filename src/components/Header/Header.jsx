@@ -1,8 +1,9 @@
 import { AppBar, Box, Button, Container, CssBaseline, Divider, Drawer, IconButton, Link, List, ListItem, ListItemButton, ListItemText, Menu, styled, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes, { func } from 'prop-types';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from "react-router-dom";
+import './Header.css';
 
 const navItems = ['Home', 'Cars', 'Test drive', 'Contacts'];
 const navLinks = [ {title: 'Home', route: '/'}, {title: 'Cars', route: '/cars'}, {title: 'Test drive', route: '/'}, {title: 'Builds', route: '/builds'}];
@@ -38,6 +39,15 @@ function Header(props) {
             </List>
         </Box>
     );
+
+    function getLinkState(link){
+        let activeClass ='NavLink';
+        if(link.isActive){
+            activeClass +=' active';
+        } 
+        
+        return activeClass;
+    }
 
     const container = window !== undefined ? () => window().document.body : undefined;
     
@@ -78,14 +88,11 @@ function Header(props) {
                                 flexDirection: 'row',
                                 gap: 4
                             }}>
-                                {/* {navItems.map((item, index) => (
-                                    <Link href="#" key={index} underline="hover" sx={{ color: 'common.black' }} >
-                                            {item}
-                                    </Link>
-                                ))} */}
                                 {navLinks.map((item, index) => (
-                                    <NavLink key={index} to={item.route} >
-                                            {item.title}
+                                    <NavLink key={index} className={getLinkState} to={item.route} >
+                                        <Typography variant="p" sx={{ '&:hover':{color:'primary.main', textDecoration:'underline'} }}>
+                                             {item.title}
+                                         </Typography> 
                                     </NavLink>
                                 ))}
                             </Box>
