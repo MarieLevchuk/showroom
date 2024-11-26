@@ -1,7 +1,7 @@
 import { Box, Container, Pagination } from "@mui/material";
 import Filter from "./Filter";
 import ModelsList from "./ModelsList";
-import SectionHeader from "../MainSection/SectionHeader";
+import SectionHeader from "../SectionHeader/SectionHeader";
 
 export default function ModelsSection(){
     return(
@@ -10,7 +10,6 @@ export default function ModelsSection(){
                 <SectionHeader title='All Models' />
                 <Filter/>
                 <ModelsList/>
-                
             </Container>
         </Box >
     );

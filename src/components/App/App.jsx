@@ -6,24 +6,26 @@ import Footer from '../Footer/Footer'
 import Header from '../Header/Header';
 import { Provider } from 'react-redux'; 
 import store from '../../redux/store.js';
-import ModelsSection from '../ModelsSection/ModelsSection'
-import ModelPreviewSection from '../ModelPreviewSection/ModelPreviewSection'
-import BuildsSection from '../BuildsSection/BuildsSection'
+import { BrowserRouter } from 'react-router-dom';
+import { PagesRouter } from '../../routes/PagesRouter.jsx'
 
 export default function App() {
   return (
-    <>
-      <Provider store={store}>
-        <Header/>
-        {/* <BuildsSection/> */}
-        {/* <ModelPreviewSection/> */}
-        {/* <ModelsSection/> */}
+    <BrowserRouter >
+      <div>
+        <Provider store={store}>
+          <Header/>
+          <PagesRouter />
+          {/* <BuildsSection/> */}
+          {/* <ModelPreviewSection/> */}
+          {/* <ModelsSection/> */}
 
-        <HeadSection/>
-        <MainSection/>
-        <Footer/>
-      </Provider>
-    </>
+          {/* <HeadSection/>
+          <MainSection/> */}
+          <Footer/>
+        </Provider>
+      </div>
+    </BrowserRouter>
   )
 
 }

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import CarCard from "./CarCard";
+import CarCard from "../CarCard/CarCard";
 
 import { useDispatch, useSelector } from "react-redux";
 import { featuredCarsLoad } from "../../redux/featuredCarsLoad";
@@ -31,7 +31,7 @@ export default function FeaturedCars(){
         return <>loading...</>
     }
     if(carsData.dataLoadState === 3){
-        return <>error: {clientsData.dataLoadError}</>
+        return <>error: {carsData.dataLoadError}</>
     }
 
     return(

@@ -1,5 +1,4 @@
 import { Box, Button, Container, IconButton, Typography, useMediaQuery } from "@mui/material";
-import Header from "../Header/Header";
 import { useTheme } from "@emotion/react";
 import Social from "../Social/Social";
 
@@ -23,8 +22,6 @@ export default function HeadSection () {
                 sm: 'linear-gradient(to right, rgba(20, 20, 20, 1) 0%, rgba(20, 20, 20, 1) 45%, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 1) 100%)'
             }
         }}>
-            {/* <Header/> */}
-
             {/* CONTENT */}
             <Box sx={{
                 height: 'inherit',

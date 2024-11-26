@@ -2,8 +2,10 @@ import { AppBar, Box, Button, Container, CssBaseline, Divider, Drawer, IconButto
 import { useState } from "react";
 import PropTypes from 'prop-types';
 import MenuIcon from '@mui/icons-material/Menu';
+import { NavLink } from "react-router-dom";
 
 const navItems = ['Home', 'Cars', 'Test drive', 'Contacts'];
+const navLinks = [ {title: 'Home', route: '/'}, {title: 'Cars', route: '/cars'}, {title: 'Test drive', route: '/'}, {title: 'Builds', route: '/builds'}];
 const drawerWidth = 240;
 
 function Header(props) {
@@ -19,10 +21,17 @@ function Header(props) {
             <Typography variant="h4" sx={{fontWeight:600, textTransform: "uppercase", color: 'primary.main', my: 2}}> showroom </Typography>                          
             <Divider />
             <List>
-                {navItems.map((item) => (
+                {/* {navItems.map((item) => (
                   <ListItem key={item} disablePadding>
                     <ListItemButton sx={{ textAlign: 'center' }}>
                       <ListItemText primary={item} />
+                    </ListItemButton>
+                  </ListItem>
+                ))} */}
+                {navLinks.map((item, index) => (
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton sx={{ textAlign: 'center' }}>
+                      <ListItemText primary={item.title} />
                     </ListItemButton>
                   </ListItem>
                 ))}
@@ -69,17 +78,22 @@ function Header(props) {
                                 flexDirection: 'row',
                                 gap: 4
                             }}>
-                                {navItems.map((item, index) => (
+                                {/* {navItems.map((item, index) => (
                                     <Link href="#" key={index} underline="hover" sx={{ color: 'common.black' }} >
                                             {item}
                                     </Link>
+                                ))} */}
+                                {navLinks.map((item, index) => (
+                                    <NavLink key={index} to={item.route} >
+                                            {item.title}
+                                    </NavLink>
                                 ))}
                             </Box>
                         </Box>
                     </Container>
                 </Toolbar>
             </AppBar>
-            {/* <Offset />                            */}
+            
             <nav>
                 <Drawer
                   container={container}
@@ -87,7 +101,7 @@ function Header(props) {
                   open={mobileOpen}
                   onClose={handleDrawerToggle}
                   ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
+                    keepMounted: true,
                   }}
                   sx={{
                     display: { xs: 'block', sm: 'none' },
@@ -101,12 +115,12 @@ function Header(props) {
     );
 }
 
-Header.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
-    window: PropTypes.func,
-  };
+// Header.propTypes = {
+//     /**
+//      * Injected by the documentation to work in an iframe.
+//      * You won't need it on your project.
+//      */
+//     window: PropTypes.func,
+// };
 
   export default Header;

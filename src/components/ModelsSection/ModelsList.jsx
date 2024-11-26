@@ -1,21 +1,23 @@
 import { Box, LinearProgress, Pagination } from "@mui/material";
-import CarCard from "../MainSection/CarCard";
 import { useDispatch, useSelector } from "react-redux";
 import { carsLoad } from "../../redux/carsLoad.js";
 import { useEffect, useMemo, useState } from "react";
+import CarCard from "../CarCard/CarCard.jsx";
+
+const perpage = 9;
 
 export default function ModelsList(){
     const carsData = useSelector(state => state.cars);
     const dispatch = useDispatch();
 
-    const [page, setPage] = useState(11);
+    const [page, setPage] = useState(1);
 
-    function loadData(page = 1){
+    function loadData(page){
        dispatch(carsLoad(page));
     }
 
     useEffect(() => {
-        loadData();
+        loadData(page);
     }, []);
     
     useEffect(() => {
@@ -23,8 +25,11 @@ export default function ModelsList(){
     }, [page]);
 
     const memoizedCars = useMemo(()=>{
-        return carsData.cars?.data?.map(model => <CarCard key={model.id} model={model}/> )
+        return carsData.cars?.data.map(model => <CarCard key={model.id} model={model}/> )
     }, [carsData.cars]);
+
+    // console.log(carsData.cars.length/perpage);
+    
 
     // render
     if(carsData.dataLoadState === 0){
@@ -34,13 +39,13 @@ export default function ModelsList(){
     //     return <Box sx={{minHeight:'70vh', width:'100%'}}>loading...<LinearProgress /></Box>
     // }
     if(carsData.dataLoadState === 3){
-        return <Box sx={{minHeight:'70vh'}}>error: {clientsData.dataLoadError}</Box>
+        return <Box sx={{minHeight:'70vh'}}>error: {carsData.dataLoadError}</Box>
     }
 
     return (
         <>
             <Box mt={4} sx={{display:'flex', justifyContent:"center"}}>
-                <Pagination count={carsData.cars?.pages} page={page} onChange={(e, value) => setPage(value)} />
+                <Pagination count={carsData.cars?.last} page={page} onChange={(e, value) => setPage(value)} />
             </Box>
             <Box mx='auto' sx={{height:20, minHeight:20, width:'90%'}}>
             {

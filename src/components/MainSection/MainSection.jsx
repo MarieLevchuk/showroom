@@ -1,11 +1,11 @@
 import { Box, Container, Divider, Link, Typography } from "@mui/material";
-import SectionHeader from "./SectionHeader";
-import CarCard from "./CarCard";
+import SectionHeader from "../SectionHeader/SectionHeader";
+import CarCard from "../CarCard/CarCard";
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import ContactForm from "../ContactForm/ContactForm";
 import Info from "../Info/Info";
 import TestDriveForm from "../TestDriveForm/TestDriveForm";
-import FeaturedCars from "./FeaturedCars";
+import FeaturedCars from "../FeaturedCars/FeaturedCars";
 
 export default function MainSection(){
 
@@ -33,7 +33,7 @@ export default function MainSection(){
 
                 {/* TITLE TEST DRIVE */}
                 <SectionHeader title="Test drive"/>
-                    <TestDriveForm/>
+                <TestDriveForm/>
             </Container>
 
                     <Info/>
