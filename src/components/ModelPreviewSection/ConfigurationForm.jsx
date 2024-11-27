@@ -80,7 +80,7 @@ export default function ConfigurationForm(){
 
                             </FormControl>
                             <Box sx={{maxWidth:{xs:'150px', sm:'200px', md:'300px'}}}>
-                                <img src='img/interior1.jpg' alt='dark interior' style={{width:'100%'}} />
+                                <img src='/img/interior1.jpg' alt='dark interior' style={{width:'100%'}} />
                             </Box>
                         </Box>
                     </Box>

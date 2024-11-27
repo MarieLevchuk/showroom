@@ -9,7 +9,7 @@ export function carByIdLoad(id) {
 
             if(response.ok){
                 const data = await response.json();
-                dispatch(updateLoadState({ state: 2, error: null }));
+                dispatch(updateLoadState({ state: 2, error: null }));                
                 dispatch(loadData(data));
             } else {
                 dispatch(updateLoadState({ state: 3, error: "HTTP error "+ response.status }));

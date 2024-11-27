@@ -4,6 +4,7 @@ import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import PersonIcon from '@mui/icons-material/Person';
+import { Link } from "react-router-dom";
 
 export default function CarCard({model}){
     return(
@@ -48,7 +49,9 @@ export default function CarCard({model}){
               </Box>
             </CardContent>
             <CardActions>
-              <Button size="small">More info</Button>
+              <Link to={`/cars/${model.id}`}>
+                <Button size="small">More info</Button>
+              </Link>
             </CardActions>
         </Card>
     );

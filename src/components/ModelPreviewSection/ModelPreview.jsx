@@ -18,7 +18,7 @@ export default function ModelPreview({model, info}){
                 // flexDirection:{xs:'column', md:'row'}
                 }}
             >
-                <img src={`img/${model.img}`} alt={model.img} style={{width:'100%'}} />
+                <img src={`/img/${model.img}`} alt={model.img} style={{width:'100%'}} />
                 {
                     (model.isConfigurable)&&
                     <Accordion>
@@ -52,11 +52,11 @@ export default function ModelPreview({model, info}){
                           </TableRow>
                           <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
                             <TableCell variant="th" component="th" scope="row">Car body</TableCell>
-                            <TableCell align="right">{model.body}</TableCell>
+                            <TableCell align="right">{info.body}</TableCell>
                           </TableRow>
                           <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
                             <TableCell variant="th" component="th" scope="row">Passenger capacity</TableCell>
-                            <TableCell align="right">{model.persons}</TableCell>
+                            <TableCell align="right">{info.persons}</TableCell>
                           </TableRow>
                           <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
                             <TableCell variant="th" component="th" scope="row">Transmission</TableCell>
@@ -68,14 +68,14 @@ export default function ModelPreview({model, info}){
                           </TableRow>
                           <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
                             <TableCell variant="th" component="th" scope="row">fuel</TableCell>
-                            <TableCell align="right">{model.fuel}</TableCell>
+                            <TableCell align="right">{info.fuel}</TableCell>
                           </TableRow>
                       </TableBody>
                     </Table>
                 </TableContainer>
                 <Box mt='auto' mb={0}>
                     <Typography sx={{fontSize:{xs:12, sm:16}}}>Starting at</Typography>
-                    <Typography variant="h3" color="primary">${model.price}</Typography>
+                    <Typography variant="h3" color="primary">${info.price}</Typography>
                 </Box>
             </Box>
         </Box>

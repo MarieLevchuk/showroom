@@ -9,9 +9,9 @@ export const PagesRouter = () => {
         <Routes>
             <Route path="/" element={ <PageMain /> } />
             <Route path="/cars" element={ <PageModels /> } />
-            {/* <Route path="/cars" element={ <PageModels /> }>
-                <Route path=":cid" element={ <PageCar /> } />
-            </Route> */}
+            {/* <Route path="/cars" element={ <PageModels /> }> */}
+                <Route path="/cars/:cid" element={ <PageCar /> } />
+            {/* </Route> */}
             <Route path="*" element={ <PageNotFound /> } />
         </Routes>
     )
