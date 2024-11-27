@@ -10,7 +10,7 @@ export const PagesRouter = () => {
             <Route path="/" element={ <PageMain /> } />
             <Route path="/cars" element={ <PageModels /> } />
             {/* <Route path="/cars" element={ <PageModels /> }> */}
-                <Route path="/cars/:cid" element={ <PageCar /> } />
+                <Route path="/cars/:cid" end element={ <PageCar /> } />
             {/* </Route> */}
             <Route path="*" element={ <PageNotFound /> } />
         </Routes>
