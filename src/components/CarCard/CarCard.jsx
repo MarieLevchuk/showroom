@@ -5,8 +5,11 @@ import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link } from "react-router-dom";
+import React from "react";
 
-export default function CarCard({model}){
+function CarCard({model}){
+    // console.log('rendered car ' + model.id);
+    
     return(
         <Card 
             sx={{ 
@@ -56,3 +59,5 @@ export default function CarCard({model}){
         </Card>
     );
 }
+
+export default React.memo(CarCard);

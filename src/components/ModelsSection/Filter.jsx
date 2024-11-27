@@ -1,9 +1,6 @@
 import { Box, Checkbox, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Paper, Radio, RadioGroup, Select, Typography } from "@mui/material";
 import { useState } from "react";
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import filterEvents from "../../events/filterEvents";
 
 const transmissionTypes = ['all', 'automatic', 'manual'];
 const fuelTypes = ['all', 'electric', 'petrol', 'disel'];
@@ -11,14 +8,33 @@ const bodyTypes =[ 'coupe', 'cabriolet', 'sports', 'sedan', 'van', 'crossover', 
 const passengerCapacity = [2, 5, 7, 8, 10];
 
 export default function Filter(){
+    const [isConfigurable, setIsConfigurable] = useState(false);
     const [persons, setPersons] = useState(passengerCapacity[0]);
     const [fuel, setFuel] = useState(fuelTypes[0]);
     const [transmission, setTransmission] = useState(transmissionTypes[0]);
     const [bodyType, setBodyType] = useState('');    
 
     const handleChange = () => {
-      console.log('filter!');
-        
+      console.log('filter changed');
+      
+      // let filterData = {
+      //   isConfigurable:isConfigurable,
+      //   persons:persons,
+      //   fuel:fuel,
+      //   transmission:transmission,
+      //   bodyType:bodyType
+      // }
+
+      // filterEvents.emit('filter', filterData);
+    }
+
+    const handleConfigurableChange = (e) => {
+      let filterData = {
+        isConfigurable: e.target.checked
+      }
+      setIsConfigurable(e.target.checked)
+
+      filterEvents.emit('filter', filterData);
     }
 
     return (
@@ -86,6 +102,9 @@ export default function Filter(){
                       }
                     </Select>
                   </FormControl>
+                  <Box mt={4}>
+                      <FormControlLabel control={<Checkbox value={isConfigurable} onChange={handleConfigurableChange}/>} label="Configurable" />
+                  </Box>
                 </Box>
             </Box>
         </Paper>

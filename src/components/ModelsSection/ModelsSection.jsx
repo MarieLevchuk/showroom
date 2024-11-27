@@ -9,7 +9,9 @@ export default function ModelsSection(){
             <Container maxWidth='lg'>
                 <SectionHeader title='All Models' />
                 <Filter/>
-                <ModelsList/>
+                <Box sx={{minHeight:'90vh'}}>
+                    <ModelsList/>
+                </Box>
             </Container>
         </Box >
     );
