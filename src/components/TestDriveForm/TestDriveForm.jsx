@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { Box, Button, Container, FormControl, InputLabel, MenuItem, NativeSelect, Paper, Select, Skeleton, Step, StepLabel, Stepper, TextField, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, Container, FormControl, InputLabel, MenuItem, NativeSelect, Paper, Select, Skeleton, Snackbar, Step, StepLabel, Stepper, TextField, Typography, useMediaQuery } from "@mui/material";
 import { useState } from "react";
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ScheduleIcon from '@mui/icons-material/Schedule';
@@ -58,6 +58,17 @@ const steps = ['Select a car', 'Select date and time', 'Your contacts'];
 
 export default function TestDriveForm(){
     const [carModel, setCarModel] = useState('');
+    const [date, setDate] = useState(null);
+    const [time, setTime] = useState(null);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+    const handleCloseSnackbar = () =>{
+      setSnackbarIsOpen(false);
+  }
+
 
     const handleCarModelChange = (e) => {
       setCarModel(e.target.value)
@@ -109,7 +120,28 @@ export default function TestDriveForm(){
     };
 
     const handleReset = () => {
+      setCarModel('')
+      setDate(null)
+      setTime(null)
+      setName('')
+      setEmail('')
+      setPhone('')
       setActiveStep(0);
+    };
+    const handleBook = () => {
+      let formdata = {
+        model: carModel,
+        date: date,
+        time: time,
+        name: name,
+        email: email,
+        phone: phone
+      }
+
+      // some logic to send formdata to a server
+      // dispatch(saveFormData(formdata))
+
+      setSnackbarIsOpen(true);
     };
       
 
@@ -166,17 +198,15 @@ export default function TestDriveForm(){
                               <Box sx={{maxWidth:300}}>
                                 {
                                   (carModel > 0)&&
-                                  <img src="img/4.webp" alt="main img" style={{width:'100%'}} />
+                                  <img src={`/img/4.webp`} alt="model" style={{width:'100%'}} />
                                 }
                               </Box>
                               <FormControl fullWidth>
-                                  <InputLabel id="demo-simple-select-label">Car model</InputLabel>
+                                  <InputLabel>Car model</InputLabel>
                                   <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
                                     value={carModel}
                                     label="Car model"
-                                    onChange={handleCarModelChange}
+                                    onChange={(e) => setCarModel(e.target.value)}
                                     sx={{minWidth:200}}
                                   >
                                     <MenuItem value=""> <em>None</em> </MenuItem>
@@ -195,12 +225,12 @@ export default function TestDriveForm(){
                             }}>
                               <LocalizationProvider dateAdapter={AdapterDayjs} >
                                 <DemoContainer components={['DatePicker']}>
-                                  <DatePicker label="Date" />
+                                  <DatePicker label="Date" value={date} onChange={(newValue) => setDate(newValue)} />
                                 </DemoContainer>
                               </LocalizationProvider>
                               <LocalizationProvider dateAdapter={AdapterDayjs} >
                                 <DemoContainer components={['TimePicker']}>
-                                  <TimePicker label="Time" />
+                                  <TimePicker label="Time" value={time} onChange={(newValue) => setTime(newValue)} />
                                 </DemoContainer>
                               </LocalizationProvider>
                             </Box>
@@ -211,9 +241,9 @@ export default function TestDriveForm(){
                               alignItems: 'center',
                               gap:2
                             }}>
-                              <TextField label="Name" />
-                              <TextField label="Phone"  />
-                              <TextField label="E-mail" />
+                              <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                              <TextField label="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                              <TextField label="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </Box>
                           )
                         }
@@ -226,7 +256,7 @@ export default function TestDriveForm(){
                           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                             <Box sx={{ flex: '1 1 auto' }} />
                             <Button onClick={handleReset}>Reset</Button>
-                            <Button variant="contained" onClick={handleReset}>Book a car</Button>
+                            <Button variant="contained" onClick={handleBook}>Book a car</Button>
                           </Box>
                         </Box>
                     ) : (
@@ -255,6 +285,13 @@ export default function TestDriveForm(){
                         </Box>
                     )}
                 </Box>
+                <Snackbar
+                  open={snackbarIsOpen}
+                  autoHideDuration={6000}
+                  onClose={handleCloseSnackbar}
+                  message="The car is booked"
+                //   action={action}
+                />
             </Container>
         </Box>
     );
