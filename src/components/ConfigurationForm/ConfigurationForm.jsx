@@ -3,6 +3,7 @@ import {useState } from "react";
 import buildEvents from '../../events/buildEvents.js';
 import { useDispatch, useSelector } from "react-redux";
 import { addBuild } from "../../redux/buildsSlice.js";
+import Snackbar from '@mui/material/Snackbar';
 
 const colors = [{name:'white', code:'#eaebec'}, {name:'black', code:'#0b0b0b'}, {name:'red', code:'#8b242c'}, {name:'blue', code:'#191c49'}];
 const interiorTypes = ['light', 'dark'];
@@ -15,6 +16,8 @@ export default function ConfigurationForm({model}){
     const buildsData = useSelector(state => state.builds);
     const dispatch = useDispatch();
     
+    const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+
     const [color, setColor] = useState(colors[0].name);
     const [interior, setInterior] = useState(interiorTypes[0]);
     const [transmission, setTransmission] = useState(transmissionTypes[0]);
@@ -24,6 +27,10 @@ export default function ConfigurationForm({model}){
     const handleColorChange = (e) => {
         setColor(e.target.value);
         buildEvents.emit('changeColor', e.target.value)
+    }
+
+    const handleCloseSnackbar = () =>{
+        setSnackbarIsOpen(false);
     }
 
     function handleSave (){
@@ -38,6 +45,7 @@ export default function ConfigurationForm({model}){
             persons: persons
         };
         dispatch(addBuild(build));
+        setSnackbarIsOpen(true);
     }
 
     function getMaxBuildId(){
@@ -90,7 +98,7 @@ export default function ConfigurationForm({model}){
 
                             </FormControl>
                             <Box sx={{maxWidth:{xs:'150px', sm:'200px', md:'300px'}}}>
-                                <img src='/img/interior1.jpg' alt='dark interior' style={{width:'100%'}} />
+                                <img src={`/img/${interior}interior.jpg`} alt='dark interior' style={{width:'100%'}} />
                             </Box>
                         </Box>
                     </Box>
@@ -142,6 +150,14 @@ export default function ConfigurationForm({model}){
 
                     <Button variant="contained" sx={{width:'auto', maxWidth:'200px'}} onClick={handleSave}>Save your build</Button>
                 </Box>
+
+                <Snackbar
+                  open={snackbarIsOpen}
+                  autoHideDuration={6000}
+                  onClose={handleCloseSnackbar}
+                  message="Build saved"
+                //   action={action}
+                />
             {/* </Paper> */}
         </Box>
     );
