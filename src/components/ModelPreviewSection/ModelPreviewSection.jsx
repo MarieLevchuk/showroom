@@ -1,15 +1,10 @@
 import { Box, Container, LinearProgress } from "@mui/material";
 import ModelPreview from "./ModelPreview";
 
-import ConfigurationForm from "./ConfigurationForm";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { carByIdLoad } from "../../redux/carByIdLoad";
 import { useEffect } from "react";
-
-const model = { id: 1, name: 'Model A', img: '2.webp', year:2019,  persons:5, body:'sedan', fuel: 'Electric', price:179050, isConfigurable: true };
-const info = { id: 1, engine: '4.0 V8', transmission: 'automatic' };
-
 
 export default function ModelPreviewSection({cid}){
     const carData = useSelector(state => state.car);

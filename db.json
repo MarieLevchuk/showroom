@@ -104,5 +104,8 @@
         {"id": 49, "price":82600, "persons":4, "body":"crossover",  "fuel": "Diesel", "engine": "2.0 V6 turbo", "transmission": "automatic", "carId": 49},
         {"id": 50, "price":140800, "persons":4, "body":"sedan",  "fuel": "Electric", "engine": "5.4 V8", "transmission": "automatic", "carId": 50},
         {"id": 51, "price":94786, "persons":2, "body":"sports",  "fuel": "Diesel", "engine": "5.4 V8 turbo", "transmission": "manual", "carId": 51}
+    ],
+    "builds": [
+        {"id":1, "model":"Example build", "color":"red", "wheels":"1", "interior":"light", "persons":2, "transmission":"automatic", "fuel":"Petrol", "body":"cabriolet"}
     ]
   }

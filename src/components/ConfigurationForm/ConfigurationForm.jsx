@@ -1,9 +1,36 @@
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, MenuItem, Paper, Radio, RadioGroup, Select, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { useState } from "react";
+import { useRef, useState } from "react";
+
+const colors = [{name:'white', code:'#eaebec'}, {name:'black', code:'#0b0b0b'}, {name:'red', code:'#8b242c'}, {name:'blue', code:'#191c49'}];
+const transmissionTypes = ['automatic', 'manual'];
+const fuelTypes = ['electric', 'petrol', 'disel'];
+const passengerCapacity = [2, 5];
+
 
 export default function ConfigurationForm(){
+    
+    const colorRef = useRef(colors[0]);
+    const transmissionRef = useRef(transmissionTypes[0]);
+    const fuelRef = useRef(fuelTypes[0]);
+    const personsRef = useRef(passengerCapacity[0]);
+
+    function handleSave (){
+        let build = {
+            // id: 1,
+            color: colorRef.current.value,
+            transmission: transmissionRef.current.value,
+            fuel: fuelRef.current.value,
+            persons: personsRef.current.value
+        };
+
+        console.log(build);
+        
+        
+        // buildEvents.emit('add', build);
+    }
+
     const [bodyType, setBodyType] = useState('');
     const handleChange = (e) => {
         console.log('changed');
@@ -18,13 +45,13 @@ export default function ConfigurationForm(){
                         <FormControl sx={{display:'flex', flexDirection:{xs:'column', sm:'row'}, alignItems:{xs:'start', sm:'center'}, gap:2}}>
                             <FormLabel>Color</FormLabel>
                             <RadioGroup
-                              aria-labelledby=""
-                              defaultValue="1"
-                              name="color"
-                              sx={{flexDirection:'row'}}
+                                // defaultValue="1"
+                                ref={colorRef}
+                                name="color"
+                                sx={{flexDirection:'row'}}
                             >
                                 <FormControlLabel value="1" control={<Radio />} label={
-                                        <Box sx={{width:'30px', height:'30px', backgroundColor:"#0f1935", borderRadius:'50%'}}/>
+                                        <Box sx={{width:'30px', height:'30px', backgroundColor:"#eaebec", borderRadius:'50%'}}/>
                                     } 
                                 />
                                 <FormControlLabel value="2" control={<Radio />} label={

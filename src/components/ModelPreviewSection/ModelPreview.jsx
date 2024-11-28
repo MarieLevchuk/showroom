@@ -1,5 +1,5 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
-import ConfigurationForm from "./ConfigurationForm";
+import ConfigurationForm from '../ConfigurationForm/ConfigurationForm.jsx';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default function ModelPreview({model, info}){
@@ -28,7 +28,7 @@ export default function ModelPreview({model, info}){
                             <Typography ml='auto' mr={2} sx={{textTransform:'uppercase'}}>Build your own</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <ConfigurationForm />
+                            <ConfigurationForm/>
                         </AccordionDetails>
                     </Accordion>
                     
