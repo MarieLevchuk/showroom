@@ -1,40 +1,44 @@
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, MenuItem, Paper, Radio, RadioGroup, Select, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { useRef, useState } from "react";
+import { use , useState } from "react";
+import buildEvents from '../../events/buildEvents.js';
 
 const colors = [{name:'white', code:'#eaebec'}, {name:'black', code:'#0b0b0b'}, {name:'red', code:'#8b242c'}, {name:'blue', code:'#191c49'}];
+const interiorTypes = ['light', 'dark'];
 const transmissionTypes = ['automatic', 'manual'];
 const fuelTypes = ['electric', 'petrol', 'disel'];
 const passengerCapacity = [2, 5];
 
 
-export default function ConfigurationForm(){
+export default function ConfigurationForm({model}){
     
-    const colorRef = useRef(colors[0]);
-    const transmissionRef = useRef(transmissionTypes[0]);
-    const fuelRef = useRef(fuelTypes[0]);
-    const personsRef = useRef(passengerCapacity[0]);
+    const [color, setColor] = useState(colors[0].name);
+    const [interior, setInterior] = useState(interiorTypes[0]);
+    const [transmission, setTransmission] = useState(transmissionTypes[0]);
+    const [fuel, setFuel] = useState(fuelTypes[0]);
+    const [persons, setPersons] = useState(passengerCapacity[0]);
+
+    
+    
+
+    const handleColorChange = (e) => {
+        setColor(e.target.value);
+        buildEvents.emit('changeColor', e.target.value)
+    }
 
     function handleSave (){
         let build = {
-            // id: 1,
-            color: colorRef.current.value,
-            transmission: transmissionRef.current.value,
-            fuel: fuelRef.current.value,
-            persons: personsRef.current.value
+            color: color,
+            interior: interior,
+            transmission: transmission,
+            fuel: fuel,
+            persons: persons
         };
 
         console.log(build);
         
-        
         // buildEvents.emit('add', build);
-    }
-
-    const [bodyType, setBodyType] = useState('');
-    const handleChange = (e) => {
-        console.log('changed');
-        
     }
 
     return(
@@ -45,51 +49,18 @@ export default function ConfigurationForm(){
                         <FormControl sx={{display:'flex', flexDirection:{xs:'column', sm:'row'}, alignItems:{xs:'start', sm:'center'}, gap:2}}>
                             <FormLabel>Color</FormLabel>
                             <RadioGroup
-                                // defaultValue="1"
-                                ref={colorRef}
+                                value={color}
                                 name="color"
                                 sx={{flexDirection:'row'}}
+                                onChange={handleColorChange}
                             >
-                                <FormControlLabel value="1" control={<Radio />} label={
-                                        <Box sx={{width:'30px', height:'30px', backgroundColor:"#eaebec", borderRadius:'50%'}}/>
-                                    } 
-                                />
-                                <FormControlLabel value="2" control={<Radio />} label={
-                                        <Box sx={{width:'30px', height:'30px', backgroundColor:"#ddd1d1", borderRadius:'50%'}}/>
-                                    } 
-                                />
-                                <FormControlLabel value="3" control={<Radio />} label={
-                                        <Box sx={{width:'30px', height:'30px', backgroundColor:"#10401e", borderRadius:'50%'}}/>
-                                    } 
-                                />
-                                <FormControlLabel value="4" control={<Radio />} 
-                                    label={
-                                        <Box sx={{width:'30px', height:'30px', backgroundColor:"#42235a", borderRadius:'50%'}}/>
-                                    }
-                               />
-                            </RadioGroup>
-                        </FormControl>
-
-                        <FormControl sx={{display:'flex', flexDirection:{xs:'column', sm:'row'}, alignItems:{xs:'start', sm:'center'}, gap:2}}>
-                            <FormLabel>Wheels</FormLabel>
-                            <RadioGroup
-                              aria-labelledby=""
-                              defaultValue="1"
-                              name="wheels"
-                              sx={{flexDirection:'row'}}
-                            >
-                                <FormControlLabel value="1" control={<Radio />} label={
-                                        <Box sx={{width:'30px', height:'30px', backgroundColor:"#0f1935", borderRadius:'50%'}}/>
-                                    } 
-                                />
-                                <FormControlLabel value="2" control={<Radio />} label={
-                                        <Box sx={{width:'30px', height:'30px', backgroundColor:"#ddd1d1", borderRadius:'50%'}}/>
-                                    } 
-                                />
-                                <FormControlLabel value="3" control={<Radio />} label={
-                                        <Box sx={{width:'30px', height:'30px', backgroundColor:"#10401e", borderRadius:'50%'}}/>
-                                    } 
-                                />
+                                {
+                                    colors.map((color, index) => {
+                                        return (<FormControlLabel key={index} value={color.name} control={<Radio />} label={
+                                            <Box sx={{width:'30px', height:'30px', backgroundColor:color.code, borderRadius:'50%'}}/>
+                                        }/>);
+                                    })
+                                }
                             </RadioGroup>
                         </FormControl>
 
@@ -97,12 +68,13 @@ export default function ConfigurationForm(){
                             <FormControl mr={4} >
                                 <FormLabel>Interior</FormLabel>
                                 <RadioGroup
-                                  aria-labelledby=""
-                                  defaultValue="1"
-                                  name="interior"
+                                    name="interior"
+                                    value={interior}
+                                    onChange={e => setInterior(e.target.value)}
                                 >
-                                    <FormControlLabel value="1" control={<Radio />} label="light" />
-                                    <FormControlLabel value="2" control={<Radio />} label="dark" />
+                                    {
+                                        interiorTypes.map((type, index) => <FormControlLabel key={index} value={type} control={<Radio />} label={type} />)
+                                    }
                                 </RadioGroup>
 
                             </FormControl>
@@ -114,67 +86,50 @@ export default function ConfigurationForm(){
 
 
                     <Box sx={{display:'flex', flexDirection:{xs:'column', sm:'row'}, flexWrap:'wrap', justifyContent:'start', alignItems:'start', gap:{xs:1, sm:3, md:5}}}>
+                        
                         <FormControl>
-                            <FormLabel>Passenger capacity</FormLabel>
+                            <FormLabel>Fuel</FormLabel>
                             <RadioGroup
-                              aria-labelledby=""
-                              defaultValue="2"
-                              name="passengers"
+                              name="fuel"
+                              value={fuel}
+                              onChange={e => setFuel(e.target.value)}
                             >
-                              <FormControlLabel value="2" control={<Radio />} label="2" />
-                              <FormControlLabel value="5" control={<Radio />} label="5" />
+                                {
+                                    fuelTypes.map((type, index) => <FormControlLabel key={index} value={type} control={<Radio />} label={type} />)
+                                }
                             </RadioGroup>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Transmission</FormLabel>
                             <RadioGroup
-                              aria-labelledby=""
-                              defaultValue="1"
                               name="transmission"
+                              value={transmission}
+                              onChange={e => setTransmission(e.target.value)}
                             >
-                              <FormControlLabel value="1" control={<Radio />} label="Automatic" />
-                              <FormControlLabel value="2" control={<Radio />} label="Manual" />
-                            </RadioGroup>
-                        </FormControl>
-
-                        <FormControl>
-                            <FormLabel>Fuel</FormLabel>
-                            <RadioGroup
-                              aria-labelledby=""
-                              defaultValue="1"
-                              name="fuel"
-                            >
-                              <FormControlLabel value="1" control={<Radio />} label="Electricity" />
-                              <FormControlLabel value="2" control={<Radio />} label="Gasoline" />
+                                {
+                                    transmissionTypes.map((type, index) => <FormControlLabel key={index} value={type} control={<Radio />} label={type} />)
+                                }
                             </RadioGroup>
                         </FormControl>
                     
                         <Box>
-                            {/* <Typography mb={1}>Car body</Typography> */}
-                            <FormControl fullWidth >
-                                <FormLabel>Car body</FormLabel>
-                                {/* <InputLabel id="demo-simple-select-label1">Car body</InputLabel> */}
+                            <FormControl >
+                                <FormLabel>Passenger capacity</FormLabel>
                                 <Select
-                                  labelId="demo-simple-select-label1"
-                                  id="demo-simple-select1"
-                                  value={bodyType}
-                                //   label="Body type"
-                                  onChange={handleChange}
-                                  sx={{minWidth:{xs:100, sm:200}, mt:1}}
+                                    value={persons}
+                                    sx={{minWidth:{xs:100, sm:200}, mt:1}}
+                                    onChange={e => setPersons(e.target.value)}
                                 >
-                                  <MenuItem value=""> <em>None</em> </MenuItem>
-                                  <MenuItem value={10}>Sedan</MenuItem>
-                                  <MenuItem value={20}>Sport</MenuItem>
-                                  <MenuItem value={30}>Cabriolet</MenuItem>
-                                  <MenuItem value={40}>SUV</MenuItem>
-                                  <MenuItem value={50}>Coupe</MenuItem>
+                                  {
+                                    passengerCapacity.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>)
+                                  }
                                 </Select>
                             </FormControl>
                         </Box>
                     </Box>
 
-                    <Button variant="contained" sx={{width:'auto', maxWidth:'200px'}}>Save your build</Button>
+                    <Button variant="contained" sx={{width:'auto', maxWidth:'200px'}} onClick={handleSave}>Save your build</Button>
                 </Box>
             {/* </Paper> */}
         </Box>

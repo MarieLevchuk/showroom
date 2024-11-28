@@ -1,8 +1,24 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 import ConfigurationForm from '../ConfigurationForm/ConfigurationForm.jsx';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import buildEvents from '../../events/buildEvents.js';
+import { useEffect, useState } from "react";
 
 export default function ModelPreview({model, info}){
+
+    const [imgColor, setimgColor] = useState('');
+
+    useEffect(()=>{
+        buildEvents.addListener('changeColor', changeColor);
+        return () => {
+            buildEvents.removeListener('changeColor', changeColor);
+        }
+    }, []);
+
+    function changeColor(color){
+        setimgColor(color);
+    }
+
     return(
         <Box
             sx={{
@@ -18,7 +34,7 @@ export default function ModelPreview({model, info}){
                 // flexDirection:{xs:'column', md:'row'}
                 }}
             >
-                <img src={`/img/${model.img}`} alt={model.img} style={{width:'100%'}} />
+                <img src={`/img/${imgColor+model.img}`} alt={model.img} style={{width:'100%'}} />
                 {
                     (model.isConfigurable)&&
                     <Accordion>
@@ -28,7 +44,7 @@ export default function ModelPreview({model, info}){
                             <Typography ml='auto' mr={2} sx={{textTransform:'uppercase'}}>Build your own</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <ConfigurationForm/>
+                            <ConfigurationForm model={model}/>
                         </AccordionDetails>
                     </Accordion>
                     
