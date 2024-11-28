@@ -1,0 +1,3 @@
+[
+    {"id":1, "carModel":"Example build", "carModelId":1, "color":"red", "interior":"light", "fuel":"petrol", "transmission":"automatic", "persons":2}
+]

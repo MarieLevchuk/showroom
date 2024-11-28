@@ -1,8 +1,8 @@
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, MenuItem, Paper, Radio, RadioGroup, Select, Typography } from "@mui/material";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { use , useState } from "react";
+import { Box, Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select } from "@mui/material";
+import {useState } from "react";
 import buildEvents from '../../events/buildEvents.js';
+import { useDispatch, useSelector } from "react-redux";
+import { addBuild } from "../../redux/buildsSlice.js";
 
 const colors = [{name:'white', code:'#eaebec'}, {name:'black', code:'#0b0b0b'}, {name:'red', code:'#8b242c'}, {name:'blue', code:'#191c49'}];
 const interiorTypes = ['light', 'dark'];
@@ -12,15 +12,14 @@ const passengerCapacity = [2, 5];
 
 
 export default function ConfigurationForm({model}){
+    const buildsData = useSelector(state => state.builds);
+    const dispatch = useDispatch();
     
     const [color, setColor] = useState(colors[0].name);
     const [interior, setInterior] = useState(interiorTypes[0]);
     const [transmission, setTransmission] = useState(transmissionTypes[0]);
     const [fuel, setFuel] = useState(fuelTypes[0]);
     const [persons, setPersons] = useState(passengerCapacity[0]);
-
-    
-    
 
     const handleColorChange = (e) => {
         setColor(e.target.value);
@@ -29,16 +28,28 @@ export default function ConfigurationForm({model}){
 
     function handleSave (){
         let build = {
+            id: getMaxBuildId() + 1,
+            carModel: model.name,
+            carModelId: model.id,
             color: color,
             interior: interior,
-            transmission: transmission,
             fuel: fuel,
+            transmission: transmission,
             persons: persons
         };
+        dispatch(addBuild(build));
+    }
 
-        console.log(build);
-        
-        // buildEvents.emit('add', build);
+    function getMaxBuildId(){
+        if(buildsData.builds.length == 0){
+            return 0;
+        }
+
+        let max = buildsData.builds.reduce((prev, current) => {
+            return (prev.id > current.id) ? prev : current;
+        });
+
+        return max.id;
     }
 
     return(
