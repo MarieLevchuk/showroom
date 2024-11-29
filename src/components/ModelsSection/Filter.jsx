@@ -14,9 +14,7 @@ export default function Filter(){
     const [transmission, setTransmission] = useState(transmissionTypes[0]);
     const [bodyType, setBodyType] = useState('');    
 
-    const handleChange = () => {
-      console.log('filter changed');
-      
+    const handleChange = () => {      
       // let filterData = {
       //   isConfigurable:isConfigurable,
       //   persons:persons,

@@ -29,9 +29,6 @@ export default function ModelPreviewSection({cid}){
     if(carData.dataLoadState === 0){
         return <Box sx={{minHeight:'70vh'}}>no data</Box>
     }
-    if(carData.dataLoadState === 1){
-        return <Box sx={{minHeight:'70vh', width:'100%'}}>loading...<LinearProgress /></Box>
-    }
     if(carData.dataLoadState === 3){
         return <Box sx={{minHeight:'70vh'}}>error: {carData.dataLoadError}</Box>
     }
@@ -43,12 +40,16 @@ export default function ModelPreviewSection({cid}){
     return(
         <Box py='100px'>
             <Container maxWidth='lg'>
-                <SectionHeader title={model.name} />
-                <ModelPreview model={model} info={model.specifications[0]}/>
-                {/* {
-                    (model.isConfigurable)&&
-                    <ConfigurationForm />
-                } */}
+                {
+                    (carData.dataLoadState === 1) ? (
+                    <Box sx={{width:'100%'}}>loading...<LinearProgress /></Box>
+                    ) : (
+                        <>
+                            <SectionHeader title={model.name} />
+                            <ModelPreview model={model} info={model.specifications[0]}/>
+                        </>
+                    )
+                }                
             </Container>
         </Box >
     );

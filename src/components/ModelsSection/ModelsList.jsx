@@ -5,14 +5,25 @@ import { useEffect, useMemo, useState } from "react";
 import CarCard from "../CarCard/CarCard.jsx";
 import filterEvents from "../../events/filterEvents";
 import useSWR, { mutate } from "swr";
+import { useSearchParams } from "react-router-dom";
 
 async function carsDataFetcher(args) {
-    let url = `http://localhost:3000/cars?_page=${args.page}&_limit=${args.perpage}&_embed=specifications`;
-    if(args.filter){
-        url+='&isConfigurable='+args.filter.isConfigurable;
-    }
+    // let url = `http://localhost:3000/cars?_page=${args.page}&_limit=${args.perpage}&_embed=specifications`;
+    let url1 = 'http://localhost:3000/cars';
+    // if(args.filter && args.filter.isConfigurable){
+    //     url+='&isConfigurable='+args.filter.isConfigurable;
+    // }
     // console.log(args.filter);
+    const url = new URL(url1)
+    const embed = {_embed:'specifications'};
+    // let params = {...embed, ...args.pagination, ...args.filter}
+    // console.log(params);
     
+    // url.searchParams.append()
+    // url.search = new URLSearchParams(params)
+    let p = Object.fromEntries(args.searchParams.entries())
+    url.search = new URLSearchParams(p)
+    // console.log(url);
 
     const response = await fetch(url, {
             method: 'get',
@@ -55,31 +66,38 @@ function getLinkByRelFromLinkHeader(header, rel){
 
     return null;    
 }
- const getObjectFromQueryString = (search) => {
+
+const getObjectFromQueryString = (search) => {
     const paramsEntries = new URLSearchParams(search).entries();
-    
     return Object.fromEntries(paramsEntries);
-  };
+};
 
 const getQueryStringFromObject = (filters) => {
     return new URLSearchParams(filters).toString();
-  };
+};
+
+
 
 export default function ModelsList(){
-    const [page, setPage] = useState(1);
-    const [perpage, setPerpage] = useState(9);
-    const [filterData, setFilterData] = useState(null);
+    
 
+    const [filterData, setFilterData] = useState({isConfigurable: false});
+    const [paginationData, setPaginationData] = useState({_page:1, _limit:9});
+
+    const [searchParams, setSearchParams] = useSearchParams({...paginationData, _embed:'specifications'});
+
+//    const isc = search.get('isc')
+//    console.log(searchParams);
    
 
     const { data, error, isLoading } = useSWR(
-        {name: "cars", page:page, perpage:perpage, filter:filterData},
+        // {name: "cars", page:page, perpage:perpage, filter:filterData},
+        // {pagination:paginationData, filter:filterData},
+        {searchParams:searchParams},
         carsDataFetcher
       );  
     
-    if ( error ) {
-      return <Box sx={{minHeight:'80vh'}}>Ошибка: </Box>;
-    }
+   
 
     useEffect(() => {
         filterEvents.addListener('filter', filter);
@@ -88,47 +106,102 @@ export default function ModelsList(){
         }
     }, []);
 
-    function filter (filters) { 
+    useEffect(() => {
+        
+        // setSearchParams( prev => {
+        //     prev.set('_page', paginationData._page);
+        //     prev.set('_limit', paginationData._limit);
+        //     return prev;
+        // })
+        setSearchParams( prev => {
+            return new URLSearchParams({
+                ...Object.fromEntries(prev.entries()),
+                ...paginationData,
+              });
+        })
+    }, [paginationData]);
+
+    useEffect(() => {
+        setSearchParams( prev => {
+            if(filterData?.isConfigurable){
+                prev.set('isConfigurable', filterData.isConfigurable);
+            }else{
+                prev.delete('isConfigurable');
+            }
+            return prev;
+        })
+    }, [filterData]);
+
+    useEffect(() => {
+        let searchParamsObj = Object.fromEntries(searchParams.entries());
+        if(searchParamsObj?._page && searchParamsObj?._limit){
+            setPaginationData(prev => {
+                prev._page = searchParamsObj._page;
+                prev._limit = searchParamsObj._limit;
+
+                return prev;
+            })
+        }
+
+        // if(searchParamsObj?.isConfigurable){
+        //     setFilterData({isConfigurable:searchParamsObj.isConfigurable})
+        // } else {
+        //     setFilterData({isConfigurable:false})
+        // }
+
+    }, [searchParams]);
+
+    function filter (filters) {
         setFilterData(filters) 
-        let b = {...filters, myfilter:'aaa'};
-        let a = getQueryStringFromObject(b);
-        console.log(a);
-        let c = getObjectFromQueryString(a);
-        console.log(c);
-        
-        
     }
+
+    const handlePaginate = (e, value) =>{
+        
+        setPaginationData( prev => {
+            let data = {...prev};
+            data._page = +value;
+
+            return data;
+        })
+    }
+
+    if ( error ) {
+        return <Box sx={{minHeight:'80vh'}}>Ошибка: </Box>;
+      }
     
     // const memoizedCars = useMemo(()=>{
     //     return data.map(model => <CarCard key={model.id} model={model}/> )
     // }, [data]);
+    // console.log(paginationData._page);
+    
     
     return (
         <>
             {
                 (data?.last)&&
-                <Box mt={4} sx={{display:'flex', justifyContent:"center"}}>
-                    <Pagination count={data.last} page={page} onChange={(e, value) => setPage(value)} />
+                <Box my={2} sx={{display:'flex', justifyContent:"center"}}>
+                    <Pagination count={data.last} page={+paginationData._page} onChange={handlePaginate} />
                 </Box>
             }
-            <Box mx='auto' sx={{height:20, minHeight:20, width:'90%'}}>
             {
-                (isLoading)&&
-                <Box sx={{width:'100%'}}>loading...<LinearProgress /></Box>
+                (isLoading)?(
+                    <Box mx='auto' sx={{height:20, minHeight:20, width:'90%'}}>
+                        <Box sx={{width:'100%'}}>loading...<LinearProgress /></Box>
+                    </Box>
+                ) : (
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent:'center',
+                            flexWrap:'wrap',
+                            gap: {xs:1, sm: 4}
+                        }}
+                    >
+                        {/* { memoizedCars } */}
+                       { data?.cars.map(model => <CarCard key={model.id} model={model}/>)}
+                    </Box>
+                )
             }
-            </Box>
-            
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent:'center',
-                    flexWrap:'wrap',
-                    gap: {xs:1, sm: 4}
-                }}
-            >
-                {/* { memoizedCars } */}
-               { data?.cars.map(model => <CarCard key={model.id} model={model}/>)}
-            </Box>
         </>
     );
 }
