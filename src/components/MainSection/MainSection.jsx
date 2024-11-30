@@ -7,6 +7,7 @@ import Info from "../Info/Info";
 import TestDriveForm from "../TestDriveForm/TestDriveForm";
 import FeaturedCars from "../FeaturedCars/FeaturedCars";
 import { Link } from "react-router-dom";
+import TestDriveFormWrapper from "../TestDriveForm/TestDriveFormWrapper";
 
 export default function MainSection(){
 
@@ -38,7 +39,7 @@ export default function MainSection(){
 
                 {/* TITLE TEST DRIVE */}
                 <SectionHeader title="Test drive"/>
-                <TestDriveForm/>
+                <TestDriveFormWrapper/>
             </Container>
 
                     <Info/>

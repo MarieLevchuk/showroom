@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { Box, Button, Container, FormControl, InputLabel, MenuItem, NativeSelect, Paper, Select, Skeleton, Snackbar, Step, StepLabel, Stepper, TextField, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, Snackbar, Step, StepLabel, Stepper, TextField, Typography, useMediaQuery } from "@mui/material";
 import { useState } from "react";
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ScheduleIcon from '@mui/icons-material/Schedule';
@@ -56,7 +56,7 @@ function ColorlibStepIcon(props) {
 
 const steps = ['Select a car', 'Select date and time', 'Your contacts'];
 
-export default function TestDriveForm(){
+export default function TestDriveForm({models}){
     const [carModel, setCarModel] = useState('');
     const [date, setDate] = useState(null);
     const [time, setTime] = useState(null);
@@ -64,15 +64,17 @@ export default function TestDriveForm(){
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
 
+    const [img, setImg] = useState('')
+
     const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
     const handleCloseSnackbar = () =>{
       setSnackbarIsOpen(false);
   }
 
-
-    const handleCarModelChange = (e) => {
+    const handleCarModelSelect = (e) => {
       setCarModel(e.target.value)
-      console.log(e.target.value)
+      let selected = models.find(model => (model.id == e.target.value) ? model : '' );
+      setImg(selected.img);
     }
 
     const theme = useTheme();
@@ -106,8 +108,6 @@ export default function TestDriveForm(){
 
     const handleSkip = () => {
         if (!isStepOptional(activeStep)) {
-            // You probably want to guard against something like this,
-            // it should never occur unless someone's actively trying to break something.
             throw new Error("You can't skip a step that isn't optional.");
         } 
 
@@ -197,8 +197,8 @@ export default function TestDriveForm(){
                             >
                               <Box sx={{maxWidth:300}}>
                                 {
-                                  (carModel > 0)&&
-                                  <img src={`/img/4.webp`} alt="model" style={{width:'100%'}} />
+                                  (carModel > 0 && img)&&
+                                  <img src={`/img/${img}`} alt="model" style={{width:'100%'}} />
                                 }
                               </Box>
                               <FormControl fullWidth>
@@ -206,13 +206,13 @@ export default function TestDriveForm(){
                                   <Select
                                     value={carModel}
                                     label="Car model"
-                                    onChange={(e) => setCarModel(e.target.value)}
+                                    onChange={handleCarModelSelect}
                                     sx={{minWidth:200}}
                                   >
                                     <MenuItem value=""> <em>None</em> </MenuItem>
-                                    <MenuItem value={10}>Model A</MenuItem>
-                                    <MenuItem value={20}>Model B</MenuItem>
-                                    <MenuItem value={30}>Model C</MenuItem>
+                                    {
+                                      models.map((model, index) => <MenuItem key={index} value={model.id}>{model.name}</MenuItem>)
+                                    }
                                   </Select>
                               </FormControl>
                             </Box>
@@ -261,7 +261,6 @@ export default function TestDriveForm(){
                         </Box>
                     ) : (
                         <Box>
-                          {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
                           <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent:'center', pt: 2 }}>
                             <Button
                               variant="outlined"
@@ -272,7 +271,6 @@ export default function TestDriveForm(){
                             >
                               Back
                             </Button>
-                            {/* <Box sx={{ flex: '1 1 auto' }} /> */}
                             {isStepOptional(activeStep) && (
                               <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
                                 Skip
@@ -290,7 +288,6 @@ export default function TestDriveForm(){
                   autoHideDuration={6000}
                   onClose={handleCloseSnackbar}
                   message="The car is booked"
-                //   action={action}
                 />
             </Container>
         </Box>
