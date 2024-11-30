@@ -1,6 +1,4 @@
 import { Box, LinearProgress, Pagination } from "@mui/material";
-// import { useDispatch, useSelector } from "react-redux";
-// import { carsLoad } from "../../redux/carsLoad.js";
 import { useEffect, useMemo, useState } from "react";
 import CarCard from "../CarCard/CarCard.jsx";
 import filterEvents from "../../events/filterEvents";

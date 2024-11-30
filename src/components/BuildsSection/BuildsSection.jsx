@@ -1,7 +1,5 @@
 import { Box, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import SectionHeader from "../SectionHeader/SectionHeader.jsx";
-import buildEvents from '../../events/buildEvents.js';
-
 
 import BuildsTableRow from "./BuildsTableRow.jsx";
 import { useEffect, useState } from "react";
@@ -10,23 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 export default function BuildsSection(){
     const buildsData = useSelector(state => state.builds);
     const dispatch = useDispatch();
-
-    // const [buildsData, setBuildsData] = useState([])
-
-    // useEffect(() => {
-    //     buildEvents.addListener('addBuild', addBuild);
-    //     return () => {
-    //         buildEvents.removeListener('addBuild', addBuild);
-    //     }
-    // }, []);
-
-   
-
-    // function addBuild(build){
-    //     console.log(build);
-    //     console.log(getMaxBuildId());
-        
-    // }
 
     return(
         <Box py='100px' sx={{ minHeight: '100vh'}}>
@@ -47,7 +28,11 @@ export default function BuildsSection(){
                         </TableHead>
                         <TableBody>
                           {
-                            buildsData.builds.map((build, index) =>  < BuildsTableRow key={index} build={build} /> )
+                            (buildsData.builds.length > 0) ? (
+                              buildsData.builds.map((build, index) =>  < BuildsTableRow key={index} build={build} /> )
+                            ) : (
+                              <Box> no data </Box>
+                            )
                           }
                         </TableBody>
                       </Table>
