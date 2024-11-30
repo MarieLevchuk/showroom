@@ -1,6 +1,7 @@
 import { Box, Button, Container, IconButton, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import Social from "../Social/Social";
+import { Link } from "react-router-dom";
 
 export default function HeadSection () {
     const theme = useTheme();
@@ -77,17 +78,19 @@ export default function HeadSection () {
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                 </Box>
                             }
-                            <Button variant="contained" sx={{
-                                maxWidth: 256,
-                                minWidth: 140,
-                                width: {xs: 0.5, md: 0.5, lg: 1},
-                                fontSize:{xs: 14, md: 20, lg: 20},
-                                textTransform:'capitalize',
-                                whiteSpace: 'nowrap',
-                                mt: 4,
-                            }}>
-                                Explore Now
-                            </Button>
+                            <Link to={`/cars`}>
+                                <Button variant="contained" sx={{
+                                    maxWidth: 256,
+                                    minWidth: 140,
+                                    width: {xs: 0.5, md: 0.5, lg: 1},
+                                    fontSize:{xs: 14, md: 20, lg: 20},
+                                    textTransform:'capitalize',
+                                    whiteSpace: 'nowrap',
+                                    mt: 4,
+                                }}>
+                                    Explore Now
+                                </Button>
+                            </Link>
                         </Box>
                     </Box>
                 </Box>
