@@ -4,9 +4,9 @@ import PropTypes, { func } from 'prop-types';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from "react-router-dom";
 import './Header.css';
+import { Link as ReactDomLink } from "react-router-dom";
 
-const navItems = ['Home', 'Cars', 'Test drive', 'Contacts'];
-const navLinks = [ {title: 'Home', route: '/'}, {title: 'Cars', route: '/cars'}, {title: 'Test drive', route: '/'}, {title: 'Builds', route: '/builds'}];
+const navLinks = [ {title: 'Home', route: '/'}, {title: 'Cars', route: '/cars'}, {title: 'Builds', route: '/builds'}];
 const drawerWidth = 240;
 
 function Header(props) {
@@ -22,18 +22,13 @@ function Header(props) {
             <Typography variant="h4" sx={{fontWeight:600, textTransform: "uppercase", color: 'primary.main', my: 2}}> showroom </Typography>                          
             <Divider />
             <List>
-                {/* {navItems.map((item) => (
-                  <ListItem key={item} disablePadding>
-                    <ListItemButton sx={{ textAlign: 'center' }}>
-                      <ListItemText primary={item} />
-                    </ListItemButton>
-                  </ListItem>
-                ))} */}
                 {navLinks.map((item, index) => (
                   <ListItem key={index} disablePadding>
-                    <ListItemButton sx={{ textAlign: 'center' }}>
-                      <ListItemText primary={item.title} />
-                    </ListItemButton>
+                    <ReactDomLink to={item.route}>
+                        <ListItemButton sx={{ textAlign: 'center' }}>
+                            <ListItemText primary={item.title} />
+                        </ListItemButton>
+                    </ReactDomLink>
                   </ListItem>
                 ))}
             </List>
