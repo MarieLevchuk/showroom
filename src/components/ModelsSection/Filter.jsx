@@ -1,5 +1,5 @@
 import { Box, Checkbox, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Paper, Radio, RadioGroup, Select, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import filterEvents from "../../events/filterEvents";
 
 const transmissionTypes = ['all', 'automatic', 'manual'];
@@ -9,37 +9,57 @@ const passengerCapacity = [2, 5, 7, 8, 10];
 
 export default function Filter(){
     const [isConfigurable, setIsConfigurable] = useState(false);
-    const [persons, setPersons] = useState(passengerCapacity[0]);
+    const [persons, setPersons] = useState('');
     const [fuel, setFuel] = useState(fuelTypes[0]);
     const [transmission, setTransmission] = useState(transmissionTypes[0]);
     const [bodyType, setBodyType] = useState('');    
 
-    const handleChange = () => {      
-      // let filterData = {
-      //   isConfigurable:isConfigurable,
-      //   persons:persons,
-      //   fuel:fuel,
-      //   transmission:transmission,
-      //   bodyType:bodyType
-      // }
+    useEffect(() => {
+      filterEvents.addListener('changedFilters', changeFilters);
+      return () => {
+          filterEvents.removeListener('changedFilters', changeFilters);
+      }
+    }, []);
 
-      // filterEvents.emit('filter', filterData);
+    const changeFilters = (searchParams) => {
+      if(searchParams.transmission){
+        setTransmission(searchParams.transmission)
+      } else {
+        setTransmission(transmissionTypes[0]);
+      }
+      if(searchParams.persons){
+        setPersons(searchParams.persons)
+      } else (
+        setPersons('')
+      )
+      if(searchParams.isConfigurable){
+        setIsConfigurable(searchParams.isConfigurable)
+      }else(
+        setIsConfigurable(false)
+      )
     }
 
-    const handleConfigurableChange = (e) => {
-      let filterData = {
-        isConfigurable: e.target.checked
+    useEffect(()=>{
+      const filterData = {};
+      if(isConfigurable){
+        filterData.isConfigurable = isConfigurable;
       }
-      setIsConfigurable(e.target.checked)
+      if(persons){
+        filterData.persons = persons;
+      }
+      if(transmission !== 'all'){
+        filterData.transmission = transmission;
+      }      
 
       filterEvents.emit('filter', filterData);
-    }
+      
+    }, [isConfigurable, persons, transmission])
 
     return (
         <Box mx='auto' sx={{ width:{xs:'auto', md:'90', lg:'70%'}}}>
         <Paper >
             <Box my={4} py={4} sx={{display:'flex', flexDirection:{xs:'column', sm:'row'}, justifyContent:'space-around', alignItems:'start'}}>
-                <Box>
+                {/* <Box>
                   <FormControl>
                     <FormLabel id="filter-fuel">Fuel</FormLabel>
                     <RadioGroup
@@ -53,14 +73,14 @@ export default function Filter(){
                       }
                     </RadioGroup>
                   </FormControl>
-                </Box>
+                </Box> */}
                 <Box>
                   <FormControl>
                     <FormLabel id="filter-transmission">Transmission</FormLabel>
                     <RadioGroup
                       aria-labelledby="filter-transmission"
                       value={transmission}
-                      onChange={(e) => { setTransmission(e.target.value); handleChange()}}
+                      onChange={(e) => setTransmission(e.target.value)}
                       name="transmission"
                     >
                       {
@@ -75,7 +95,7 @@ export default function Filter(){
                     <Select
                       labelId="filter-persons"
                       value={persons}
-                      onChange={(e) => { setPersons(e.target.value); handleChange()}}
+                      onChange={(e) => setPersons(e.target.value)}
                       sx={{minWidth:{xs:100, sm:200}, mt:1}}
                     >
                       <MenuItem value=""> <em>unset</em> </MenuItem>
@@ -86,7 +106,7 @@ export default function Filter(){
                   </FormControl>
                 </Box>
                 <Box>
-                  <FormControl fullWidth >
+                  {/* <FormControl fullWidth >
                     <FormLabel id="filter-body">Car body</FormLabel>
                     <Select
                       labelId="filter-body"
@@ -99,9 +119,9 @@ export default function Filter(){
                         bodyTypes.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>)
                       }
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
                   <Box mt={4}>
-                      <FormControlLabel control={<Checkbox value={isConfigurable} onChange={handleConfigurableChange}/>} label="Configurable" />
+                      <FormControlLabel control={<Checkbox value={isConfigurable} onChange={(e) => setIsConfigurable(e.target.checked)}/>} label="Configurable" />
                   </Box>
                 </Box>
             </Box>
