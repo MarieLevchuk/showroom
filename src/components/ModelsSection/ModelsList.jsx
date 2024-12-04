@@ -1,9 +1,9 @@
 import { Box, LinearProgress, Pagination } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import CarCard from "../CarCard/CarCard.jsx";
-import filterEvents from "../../events/filterEvents";
 import useSWR, { mutate } from "swr";
 import { useParams, useSearchParams } from "react-router-dom";
+import Filter2 from "./Filter2.jsx";
 
 async function carsDataFetcher(args) {
     let urlbase = 'http://localhost:3000/cars';
@@ -61,8 +61,7 @@ function getLinkByRelFromLinkHeader(header, rel){
 
 export default function ModelsList(){
     
-
-    const [filterData, setFilterData] = useState(null);
+    const [filterData, setFilterData] = useState({isConfigurable:false, persons:'', transmission:'all'});
     const [paginationData, setPaginationData] = useState({_page:1, _limit:9});
 
     const [searchParams, setSearchParams] = useSearchParams({...paginationData});   
@@ -72,20 +71,26 @@ export default function ModelsList(){
       carsDataFetcher
     );  
 
-    useEffect(() => {
-        filterEvents.addListener('filter', filter);
-        return () => {
-            filterEvents.removeListener('filter', filter);
+    const validateFilters =()=>{
+        const filters = {};
+        if(filterData.isConfigurable){
+          filters.isConfigurable = filterData.isConfigurable;
         }
-    }, []);
+        if(filterData.persons){
+          filters.persons = filterData.persons;
+        }
+        if(filterData.transmission && filterData.transmission !== 'all'){
+          filters.transmission = filterData.transmission;
+        }    
+
+        return filters;
+    }
 
     useEffect(() => {
-        setSearchParams( 
-            new URLSearchParams({
-                ...filterData,
-                ...paginationData,
-            })
-        )
+        
+        const filters = validateFilters();
+
+        setSearchParams( prev => ({ ...prev, ...filters, ...paginationData }) )
     }, [filterData, paginationData]);
 
     useEffect(() => {
@@ -99,23 +104,15 @@ export default function ModelsList(){
             })
         }
 
-        if(filterData && searchParamsObj){
-
-            if(filterData.transmission !== searchParamsObj.transmission ||
-                filterData.persons != searchParamsObj.persons||
-                filterData.isConfigurable !== searchParamsObj.isConfigurable)
-            {
-                    filterEvents.emit('changedFilters', searchParamsObj);
-            }
-        }
-
-        
+        if(searchParamsObj){
+            setFilterData(prev => {
+                prev.isConfigurable = searchParamsObj.isConfigurable ?? false;
+                prev.persons = searchParamsObj.persons ?? '';
+                prev.transmission = searchParamsObj.transmission ?? 'all';
+                return prev;
+            })
+        }        
     }, [searchParams]);
-
-
-    function filter (filters) {
-        setFilterData(filters) 
-    }
 
     const handlePaginate = (e, value) =>{
         
@@ -127,13 +124,15 @@ export default function ModelsList(){
         })
     }
 
+    // render
+
     if ( error ) {
         return <Box sx={{minHeight:'80vh'}}>Ошибка</Box>;
     }
-        
     
     return (
         <>
+            <Filter2 {...filterData} setFilters={setFilterData} />
             {
                 (data?.last)&&
                 <Box my={2} sx={{display:'flex', justifyContent:"center"}}>

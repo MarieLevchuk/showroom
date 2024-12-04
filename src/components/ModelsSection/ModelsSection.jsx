@@ -8,7 +8,6 @@ export default function ModelsSection(){
         <Box py='100px'>
             <Container maxWidth='lg'>
                 <SectionHeader title='All Models' />
-                <Filter/>
                 <Box sx={{minHeight:'90vh'}}>
                     <ModelsList/>
                 </Box>
